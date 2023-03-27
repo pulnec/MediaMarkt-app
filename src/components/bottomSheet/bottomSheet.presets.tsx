@@ -12,7 +12,6 @@ const { height } = Dimensions.get("screen");
 
 export const Container = styled.View`
   background-color: ${COLORS.SECONDARY};
-  min-height: ${height / 2.5}px;
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -31,4 +30,9 @@ export const Header = styled.View`
 export const Title = styled(Text)`
   font-size: ${nf(20)}px;
   font-weight: 500;
+`;
+
+export const Underline = styled.View`
+  border-bottom-width: 1px;
+  border-bottom-color: ${COLORS.TERTIARY};
 `;

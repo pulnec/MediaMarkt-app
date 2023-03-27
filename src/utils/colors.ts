@@ -8,5 +8,6 @@ export const COLORS = {
   BACKGROUND: {
     PRIMARY: "#FFFFFF",
     SECONDARY: "#404040",
+    TERTIARY: "#BAEAEA",
   },
 };

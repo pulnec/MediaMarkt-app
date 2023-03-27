@@ -4,6 +4,7 @@ import Screen from "../modules";
 import { ROUTES } from "./routes";
 import HeaderTitle from "../components/headerTitle/headerTitle";
 import BackButton from "../components/backbutton/backButton";
+import { navigationRef } from "./service/navigation.service";
 
 const INITIAL_ROUTE = ROUTES.PARCEL.ROUTE;
 
@@ -11,7 +12,7 @@ const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName={INITIAL_ROUTE}
         screenOptions={{
@@ -35,6 +36,20 @@ const AppNavigation = () => {
             headerBackVisible: false,
             headerTitle: (props) => (
               <HeaderTitle {...props} title={ROUTES.SCAN.TITLE} back={true} />
+            ),
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.goBack()} />
+            ),
+          })}
+        />
+
+        <Stack.Screen
+          name={ROUTES.PARCEL_DETAIL.ROUTE}
+          component={Screen.ParcelDetail}
+          options={({ navigation, route }) => ({
+            headerBackVisible: false,
+            headerTitle: (props) => (
+              <HeaderTitle {...props} back={true} route={route} />
             ),
             headerLeft: () => (
               <BackButton onPress={() => navigation.goBack()} />

@@ -1,12 +1,13 @@
 import { View, Text } from "react-native";
 import Modal from "react-native-modal";
-import { Container, Title, Header } from "./bottomSheet.presets";
+import { Container, Title, Header, Underline } from "./bottomSheet.presets";
 
 export default function BottomSheet({
   children,
   title,
   isVisible,
   closeAction,
+  underline = false,
 }: any) {
   return (
     <Modal
@@ -18,6 +19,7 @@ export default function BottomSheet({
         <Header>
           <Title value={title} />
         </Header>
+        {underline && <Underline />}
         {children}
       </Container>
     </Modal>

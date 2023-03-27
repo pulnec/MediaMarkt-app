@@ -11,6 +11,8 @@ import {
   Information,
 } from "./scan.presets";
 import Icons from "../../components/icons";
+import BottomSheet from "../../components/bottomSheet/bottomSheet";
+import ParcelSheetContent from "./parcel/parcel.sheet";
 
 const { width } = Dimensions.get("screen");
 const FACTOR = 0.8;
@@ -20,14 +22,66 @@ const AJUST_SIZE = {
   height: 15,
 };
 
+const TITLE_SHEET: any = {
+  parcel: "Parcel added successfully",
+  carrier: "Carrier information",
+  detail: "Parcel added successfully",
+};
+
+const dataDetail = [
+  {
+    id: 1,
+    title: "Parcel pick up",
+    detail1: "Parcel at Seur center",
+    detail2: "Parcel delivery at client’s home",
+    current: true,
+  },
+  {
+    id: 2,
+    title: "Parcel pick up",
+    detail1: "Parcel at Seur center",
+    detail2: "Parcel delivery at client’s home",
+    current: true,
+  },
+  {
+    id: 2,
+    title: "Parcel pick up",
+    detail1: "Parcel at Seur center",
+    detail2: "Parcel delivery at client’s home",
+    current: false,
+  },
+];
+
 export default function Scan() {
   const [scanEnabled, setScanEnabled] = useState(true);
   const [data, setData] = useState<BarCodeScanningResult | null>(null);
+  const [openSheet, setOpenSheet] = useState(false);
+  const [sheetType, setSheetType] = useState("parcel");
+
+  const openSheetAction = () => {
+    setOpenSheet(!openSheet);
+  };
+
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   useEffect(() => {
     requestPermission();
   }, []);
+
+  useEffect(() => {
+    if (data && scanEnabled) {
+      setScanEnabled(false);
+      openSheetAction();
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (!openSheet) {
+      setData(null);
+      setScanEnabled(true);
+      setSheetType("parcel");
+    }
+  }, [openSheet]);
 
   const getInformation = () => {
     return permission?.granted
@@ -46,7 +100,6 @@ export default function Scan() {
             <Camera
               onBarCodeScanned={(scanResponse) => {
                 if (scanResponse.data !== "") {
-                  setScanEnabled(false);
                   setData(scanResponse);
                 }
               }}
@@ -61,6 +114,19 @@ export default function Scan() {
           </FooterText>
         </Container>
       )}
+      <BottomSheet
+        isVisible={openSheet}
+        closeAction={openSheetAction}
+        title={TITLE_SHEET[sheetType]}
+        underline={true}
+      >
+        <ParcelSheetContent
+          onNext={() => setSheetType("carrier")}
+          onDetail={() => setSheetType("detail")}
+          next={sheetType}
+          data={dataDetail}
+        />
+      </BottomSheet>
     </ScreenLayout>
   );
 }

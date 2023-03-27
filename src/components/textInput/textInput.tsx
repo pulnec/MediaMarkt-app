@@ -12,7 +12,7 @@ import {
 export default function TextInput({
   label = "Label",
   placeholder,
-  value = "DFADSFASADDSA",
+  value = "",
   type = "text",
   select = false,
 }: any) {

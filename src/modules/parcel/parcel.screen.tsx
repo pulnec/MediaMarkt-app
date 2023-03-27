@@ -10,8 +10,9 @@ import { fetchCarriers } from "../../redux/slices/carriers.slice";
 import { fetchItems } from "../../redux/slices/items.slice";
 import BottomSheet from "../../components/bottomSheet/bottomSheet";
 import AddSheetContent from "./add/add.sheet";
+import { ROUTES } from "../../navigation/routes";
 
-export default function Parcel() {
+export default function Parcel({ navigation }: any) {
   const dispatch = useDispatch();
   const [openSheet, setOpenSheet] = useState(false);
   const { parcel } = useSelector((state: any) => state.parcels);
@@ -29,6 +30,15 @@ export default function Parcel() {
   useEffect(() => {
     getData();
   }, []);
+
+  const addAction = () => {
+    openSheetAction();
+    navigation.navigate(ROUTES.SCAN.ROUTE);
+    /*
+    navigation.navigate(ROUTES.PARCEL_DETAIL.ROUTE, {
+      title: "Parcel List 02/11/2022",
+    }); */
+  };
 
   return (
     <ScreenLayout>
@@ -60,7 +70,7 @@ export default function Parcel() {
         closeAction={openSheetAction}
         title="Parcel and carrier information"
       >
-        <AddSheetContent />
+        <AddSheetContent onPress={addAction} />
       </BottomSheet>
     </ScreenLayout>
   );

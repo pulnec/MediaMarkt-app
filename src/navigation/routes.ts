@@ -7,4 +7,8 @@ export const ROUTES = {
     ROUTE: "scan",
     TITLE: "Scan Barcode",
   },
+  PARCEL_DETAIL: {
+    ROUTE: "parcelDetail",
+    TITLE: "",
+  },
 };

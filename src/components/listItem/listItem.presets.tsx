@@ -44,3 +44,9 @@ export const TextRight = styled(Text)`
   color: ${COLORS.PRIMARY};
   font-weight: 500;
 `;
+
+export const IconLeft = styled.View`
+  width: ${wp(50)}px;
+  height: ${wp(50)}px;
+  margin-right: 4px;
+`;

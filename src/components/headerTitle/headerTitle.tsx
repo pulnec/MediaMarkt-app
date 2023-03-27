@@ -6,7 +6,7 @@ import {
   normalizeHorizontal as wp,
 } from "../../utils/normalize";
 
-export default function HeaderTitle({ title, back }: any) {
+export default function HeaderTitle({ title, back, route }: any) {
   return (
     <View
       style={{
@@ -24,7 +24,7 @@ export default function HeaderTitle({ title, back }: any) {
           fontWeight: "500",
           color: COLORS.TEXT.PRIMARY,
         }}
-        value={title}
+        value={title || route.params.title}
       />
     </View>
   );

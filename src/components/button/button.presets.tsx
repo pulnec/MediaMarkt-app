@@ -16,8 +16,23 @@ export const Container = styled(TouchableOpacity)`
   border-radius: 5px;
   width: 100%;
 `;
+
+export const ContainerSecondary = styled(TouchableOpacity)`
+  height: ${hp(45)}px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  width: 100%;
+`;
+
 export const Label = styled(Text)`
   color: ${COLORS.SECONDARY};
+  font-size: ${nf(14)}px;
+  font-weight: 500;
+`;
+
+export const LabelSecondary = styled(Text)`
+  color: ${COLORS.PRIMARY};
   font-size: ${nf(14)}px;
   font-weight: 500;
 `;

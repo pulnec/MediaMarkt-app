@@ -30,7 +30,7 @@ export default function TimeLine({ data = [] }: any) {
           const nextValue =
             data[index + 1] !== undefined && data[index + 1].current;
           return (
-            <LineContainer>
+            <LineContainer key={index}>
               {item.current ? <CheckCircle /> : <CircleDisabled />}
               {!isLast ? nextValue ? <Line /> : <LineDisabled /> : null}
             </LineContainer>
@@ -39,9 +39,9 @@ export default function TimeLine({ data = [] }: any) {
       </ContainerBox>
 
       <ContainerBox>
-        {data.map((item: any) => {
+        {data.map((item: any, index: number) => {
           return (
-            <InformationContainer>
+            <InformationContainer key={index}>
               <Title value={item.title} />
               <Detail value={item.detail1} />
               <Detail value={item.detail2} />

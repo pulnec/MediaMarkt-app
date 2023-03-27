@@ -5,6 +5,8 @@ import { ROUTES } from "./routes";
 import HeaderTitle from "../components/headerTitle/headerTitle";
 import BackButton from "../components/backbutton/backButton";
 import { navigationRef } from "./service/navigation.service";
+import { LogBox } from "react-native";
+LogBox.ignoreAllLogs();
 
 const INITIAL_ROUTE = ROUTES.PARCEL.ROUTE;
 

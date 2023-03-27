@@ -11,6 +11,7 @@ import { fetchItems } from "../../redux/slices/items.slice";
 import BottomSheet from "../../components/bottomSheet/bottomSheet";
 import AddSheetContent from "./add/add.sheet";
 import { ROUTES } from "../../navigation/routes";
+import Alert from "../../components/alert/alert";
 
 export default function Parcel({ navigation }: any) {
   const dispatch = useDispatch();
@@ -33,11 +34,16 @@ export default function Parcel({ navigation }: any) {
 
   const addAction = () => {
     openSheetAction();
-    navigation.navigate(ROUTES.SCAN.ROUTE);
-    /*
     navigation.navigate(ROUTES.PARCEL_DETAIL.ROUTE, {
       title: "Parcel List 02/11/2022",
-    }); */
+    });
+  };
+
+  const activeScan = () => {
+    openSheetAction();
+    setTimeout(() => {
+      navigation.navigate(ROUTES.SCAN.ROUTE);
+    }, 400);
   };
 
   return (
@@ -70,8 +76,9 @@ export default function Parcel({ navigation }: any) {
         closeAction={openSheetAction}
         title="Parcel and carrier information"
       >
-        <AddSheetContent onPress={addAction} />
+        <AddSheetContent onPress={addAction} onActiveScan={activeScan} />
       </BottomSheet>
+      <Alert />
     </ScreenLayout>
   );
 }

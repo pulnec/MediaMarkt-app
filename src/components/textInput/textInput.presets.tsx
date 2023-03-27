@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native";
+import { Dimensions, Pressable } from "react-native";
 import styled from "styled-components/native";
 import { COLORS } from "../../utils/colors";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../utils/normalize";
 import Text from "../text/text";
 
-export const Container = styled.View`
+export const Container = styled(Pressable)`
   width: 100%;
   border-width: 1px;
   border-color: ${COLORS.TERTIARY};

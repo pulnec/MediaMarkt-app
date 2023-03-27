@@ -12,31 +12,56 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/button/button";
 import BottomSheet from "../../components/bottomSheet/bottomSheet";
 import DeliverySheetContent from "./delivery/delivery.sheet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { showAlert } from "../../redux/slices/app.slice";
+
+const data = [
+  {
+    id: 1,
+    title: "641DB7B2FC13 Parcel List",
+    sub1: "Seur",
+    sub2: "5 items to be picked up",
+  },
+  {
+    id: 2,
+    title: "641DB7B2FC13 Parcel List",
+    sub1: "Seur",
+    sub2: "5 items to be picked up",
+  },
+];
+
+const alertOptions = {
+  isVisible: true,
+  type: "success",
+  text: "Parcel successfully delivered to the carrier",
+  buttonLabel: "GO TO PARCEL LIST",
+  actionButton: "",
+};
+
+const SHEET_TYPE: any = {
+  delivery: "Delivery information",
+  signer: "Driver’s signature",
+};
 
 export default function ParcelDetail() {
   const dispatch = useDispatch();
-  const { parcel } = useSelector((state: any) => state.parcels);
   const [openSheet, setOpenSheet] = useState(false);
+  const [sheetType, setSheetType] = useState("delivery");
 
   const openSheetAction = () => {
     setOpenSheet(!openSheet);
   };
 
-  const data = [
-    {
-      id: 1,
-      title: "641DB7B2FC13 Parcel List",
-      sub1: "Seur",
-      sub2: "5 items to be picked up",
-    },
-    {
-      id: 2,
-      title: "641DB7B2FC13 Parcel List",
-      sub1: "Seur",
-      sub2: "5 items to be picked up",
-    },
-  ];
+  const deliverySave = () => {
+    openSheetAction();
+    dispatch(showAlert(alertOptions));
+  };
+
+  useEffect(() => {
+    if (!openSheet) {
+      setSheetType("delivery");
+    }
+  }, [openSheet]);
 
   return (
     <ScreenLayout>
@@ -70,9 +95,14 @@ export default function ParcelDetail() {
       <BottomSheet
         isVisible={openSheet}
         closeAction={openSheetAction}
-        title="Delivery information"
+        title={SHEET_TYPE[sheetType]}
       >
-        <DeliverySheetContent onPress={openSheetAction} />
+        <DeliverySheetContent
+          onPress={openSheetAction}
+          onDeliverySave={deliverySave}
+          onChangeType={setSheetType}
+          type={sheetType}
+        />
       </BottomSheet>
     </ScreenLayout>
   );

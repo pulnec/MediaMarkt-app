@@ -12,11 +12,26 @@ import { useState, useRef } from "react";
 import SignatureScreen from "react-native-signature-canvas";
 import { COLORS } from "../../../utils/colors";
 import Text from "../../../components/text/text";
+import { showAlert } from "../../../redux/slices/app.slice";
+import { useDispatch } from "react-redux";
 
 const style = `.m-signature-pad { background-color: ${COLORS.BACKGROUND.TERTIARY}; border: none; }`;
 
-export default function DeliverySheetContent({ onPress }: any) {
-  const [contentType, setContentType] = useState("delivery");
+const alertParams = {
+  isVisible: true,
+  type: "wrong",
+  text: "Some information is wrong",
+  buttonLabel: "BACK",
+};
+
+export default function DeliverySheetContent({
+  onPress,
+  onDeliverySave,
+  onChangeType,
+  type,
+}: any) {
+  const dispatch = useDispatch();
+  const [signData, setSignData] = useState<string | null>(null);
 
   const ref = useRef<any>();
 
@@ -27,16 +42,28 @@ export default function DeliverySheetContent({ onPress }: any) {
   };
 
   const completeSigned = (signature: string) => {
-    console.log(signature);
+    setSignData(signature);
   };
 
   const handleEnd = () => {
     ref.current.readSignature();
   };
 
-  const goSign = () => setContentType("signer");
+  const goSign = () => onChangeType("signer");
 
-  if (contentType === "signer") {
+  const save = () => {
+    if (signData) {
+      onDeliverySave();
+    } else {
+      dispatch(showAlert(alertParams));
+    }
+  };
+
+  const handleClear = () => {
+    setSignData(null);
+  };
+
+  if (type === "signer") {
     return (
       <Container>
         <FrameSigner>
@@ -48,21 +75,22 @@ export default function DeliverySheetContent({ onPress }: any) {
             ref={ref}
             onEnd={handleEnd}
             onOK={completeSigned}
+            onClear={handleClear}
             autoClear={false}
             webStyle={style}
           />
         </FrameSigner>
         <Spacer />
         <ContainerButton>
-          <Button label="RESET" onPress={resetSigner} />
+          <Button label="RESET" onPress={resetSigner} preset="secondary" />
           <Spacer />
-          <Button label="SAVE" onPress={() => onPress()} />
+          <Button label="SAVE" onPress={save} />
         </ContainerButton>
       </Container>
     );
   }
 
-  if (contentType === "delivery") {
+  if (type === "delivery") {
     return (
       <Container>
         <TextInput label="Driver’s name" value="641DB7B2FC13" />

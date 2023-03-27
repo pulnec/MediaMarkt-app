@@ -15,9 +15,10 @@ export default function TextInput({
   value = "",
   type = "text",
   select = false,
+  onPress,
 }: any) {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <LabelContanier>
         <Text value={label} />
       </LabelContanier>

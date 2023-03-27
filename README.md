@@ -24,4 +24,4 @@ yarn ios
 
 ![Alt text](https://i.ibb.co/PhWbvXv/app-newe.png)
 
-![Alt text](https://i.ibb.co/6NhW0YB/ezgif-com-video-to-gif-4.gif)
+![Alt text](https://i.ibb.co/84JZsDV/ezgif-com-resize.gif)

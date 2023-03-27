@@ -1,22 +1,17 @@
-# TypeScript Expor Bootstrap (base / project starter)
+# Challenge
 
-This is a repository intended to serve as a starting point if you want to bootstrap an Expo project in TypeScript.
+This repository contains the development of the MediaMarkt challenge.
 
-## Features
+Developed in React Native Expo.
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [Expo](https://expo.dev/)
-- [Jest](https://jestjs.io) with [React Testing Library](https://testing-library.com/docs/dom-testing-library/intro)
-- [Babel](https://babeljs.io/)
+NOTE:
+This development contains the entire frontend and a store provider, it remains to adjust types and complete the functionality.
 
 ## Running the app
 
 ```bash
 # install dependencies
 yarn install
-
-# run in web mode
-yarn web
 
 # run in android
 yarn android
@@ -25,10 +20,8 @@ yarn android
 yarn ios
 ```
 
-## Testing
+## Preview
 
-### Jest with supertest
+![Alt text](https://i.ibb.co/PhWbvXv/app-newe.png)
 
-```bash
-yarn test
-```
+![Alt text](https://i.ibb.co/6NhW0YB/ezgif-com-video-to-gif-4.gif)

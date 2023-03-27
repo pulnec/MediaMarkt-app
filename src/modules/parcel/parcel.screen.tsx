@@ -11,7 +11,6 @@ import { fetchItems } from "../../redux/slices/items.slice";
 import BottomSheet from "../../components/bottomSheet/bottomSheet";
 import AddSheetContent from "./add/add.sheet";
 import { ROUTES } from "../../navigation/routes";
-import Alert from "../../components/alert/alert";
 
 export default function Parcel({ navigation }: any) {
   const dispatch = useDispatch();
@@ -78,7 +77,6 @@ export default function Parcel({ navigation }: any) {
       >
         <AddSheetContent onPress={addAction} onActiveScan={activeScan} />
       </BottomSheet>
-      <Alert />
     </ScreenLayout>
   );
 }

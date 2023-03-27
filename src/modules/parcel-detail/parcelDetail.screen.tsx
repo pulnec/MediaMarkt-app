@@ -30,21 +30,12 @@ const data = [
   },
 ];
 
-const alertOptions = {
-  isVisible: true,
-  type: "success",
-  text: "Parcel successfully delivered to the carrier",
-  buttonLabel: "GO TO PARCEL LIST",
-  actionButton: "",
-};
-
 const SHEET_TYPE: any = {
   delivery: "Delivery information",
   signer: "Driver’s signature",
 };
 
 export default function ParcelDetail() {
-  const dispatch = useDispatch();
   const [openSheet, setOpenSheet] = useState(false);
   const [sheetType, setSheetType] = useState("delivery");
 
@@ -54,7 +45,6 @@ export default function ParcelDetail() {
 
   const deliverySave = () => {
     openSheetAction();
-    dispatch(showAlert(alertOptions));
   };
 
   useEffect(() => {

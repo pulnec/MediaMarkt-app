@@ -14,14 +14,23 @@ import { COLORS } from "../../../utils/colors";
 import Text from "../../../components/text/text";
 import { showAlert } from "../../../redux/slices/app.slice";
 import { useDispatch } from "react-redux";
+import Alert from "../../../components/alert/alert";
 
 const style = `.m-signature-pad { background-color: ${COLORS.BACKGROUND.TERTIARY}; border: none; }`;
 
-const alertParams = {
+const alertError = {
   isVisible: true,
   type: "wrong",
   text: "Some information is wrong",
   buttonLabel: "BACK",
+};
+
+const alertSuccess = {
+  isVisible: true,
+  type: "success",
+  text: "Parcel successfully delivered to the carrier",
+  buttonLabel: "GO TO PARCEL LIST",
+  actionButton: "",
 };
 
 export default function DeliverySheetContent({
@@ -53,9 +62,9 @@ export default function DeliverySheetContent({
 
   const save = () => {
     if (signData) {
-      onDeliverySave();
+      dispatch(showAlert(alertSuccess));
     } else {
-      dispatch(showAlert(alertParams));
+      dispatch(showAlert(alertError));
     }
   };
 
@@ -86,6 +95,7 @@ export default function DeliverySheetContent({
           <Spacer />
           <Button label="SAVE" onPress={save} />
         </ContainerButton>
+        <Alert />
       </Container>
     );
   }
